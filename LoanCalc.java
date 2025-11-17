@@ -30,8 +30,8 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {	
 		double rest = loan;
 		for(int i = 0;i < n; i++){
-			rest = rest - payment;
 			rest = rest + rest * rate;
+			rest = rest - payment;
 		}
 		return rest;
 	}
