@@ -25,82 +25,124 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		int i =0; 
-		while (i<x2){
-			x1++;
-			i++;
+		if (x2 >= 0) {
+			int i = 0;
+			while (i < x2) {
+				x1++;
+				i++;
+			}
+		} else {
+			int i = 0;
+			while (i < -x2) {
+				x1--;
+				i++;
+			}
 		}
 		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-	int i =0; 
-		while (i<x2){
-			x1--;
-			i++;
-		}		return x1;
+		return plus(x1, -x2);
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		int i = 0;
-		int x3= 0;
-		while(i< x2){
-          x3 = plus(x3, x1);
-		  i++;
+		if (x2 == 0) return 0;
+		
+		int absX2 = x2;
+		boolean negX2 = false;
+		if (x2 < 0) {
+			absX2 = -x2;
+			negX2 = true;
 		}
-		return x3;
+		
+		int absX1 = x1;
+		boolean negX1 = false;
+		if (x1 < 0) {
+			absX1 = -x1;
+			negX1 = true;
+		}
+		
+		int result = 0;
+		int i = 0;
+		while (i < absX2) {
+			result = plus(result, absX1);
+			i++;
+		}
+		
+		// If signs differ, negate result
+		if ((negX1 && !negX2) || (!negX1 && negX2)) {
+			result = -result;
+		}
+		
+		return result;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		int powresult = 1;
+		if (n == 0) return 1;
+		if (x == 0) return 0;
+		
+		int result = 1;
 		int i = 0;
-		if(n == 0) {
-           powresult = 1;
-		} else {
-			while(i < n){
-				powresult = times(powresult, x);
-				i++;
-			}
+		while (i < n) {
+			result = times(result, x);
+			i++;
 		}
-		return powresult;
+		
+		return result;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
+		int absX1 = x1;
+		int absX2 = x2;
+		boolean negX1 = false;
+		boolean negX2 = false;
+		
+		if (x1 < 0) {
+			absX1 = -x1;
+			negX1 = true;
+		}
+		if (x2 < 0) {
+			absX2 = -x2;
+			negX2 = true;
+		}
+		
 		int count = 0;
 		int i = 0;
-		while (count <= x1){
-			if (plus(count, x2) > x1){
+		while (count <= absX1) {
+			if (plus(count, absX2) > absX1) {
 				break;
 			}
-			count = plus(count, x2);
+			count = plus(count, absX2);
 			i++;
 		}
+		
+		// If signs differ, negate result
+		if ((negX1 && !negX2) || (!negX1 && negX2)) {
+			i = -i;
+		}
+		
 		return i;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		int checkover = 0;
-		while (checkover <= x1){
-			checkover = plus(checkover, x2);
-		}
-		int moduresult = minus(x1 ,minus(checkover , x2));
-		return moduresult;
-	}	
+		int quotient = div(x1, x2);
+		return minus(x1, times(quotient, x2));
+	}
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
 		int i = 0;
-		while(pow(i, 2) < x){
+		while (pow(i, 2) < x) {
 			i++;
 		}
-		if (pow(i, 2) > x){
+		if (pow(i, 2) > x) {
 			i--;
 		}
 		return i;
-	}	  	  
+	}    
 }
