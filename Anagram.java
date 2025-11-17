@@ -29,6 +29,9 @@ public class Anagram {
 	public static boolean isAnagram(String str1, String str2) {
 		str1 = preProcess(str1);
 		str2 = preProcess(str2);
+		// Remove spaces for comparison
+		str1 = str1.replace(" ", "");
+		str2 = str2.replace(" ", "");
 		String temp = str2;
 		if (str1.length() != str2.length()){
 			return false;
@@ -61,6 +64,8 @@ public class Anagram {
 			if(c >= 'A'&& c <='Z'){//אם היא אות גדולה 
 		       wordprepsString += (char)(c + 32);
 			}else if (c >= 'a' && c <= 'z'){
+				wordprepsString += c;
+			}else if (c == ' '){
 				wordprepsString += c;
 			}
 		}
