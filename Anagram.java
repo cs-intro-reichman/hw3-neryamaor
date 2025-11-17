@@ -62,7 +62,6 @@ public class Anagram {
 		       wordprepsString += (char)(c + 32);
 			}else if (c >= 'a' && c <= 'z'){
 				wordprepsString += c;
-			//צריך להוסיף רווחים או לא?
 			}
 		}
 		return wordprepsString;

@@ -55,34 +55,29 @@ public class Algebra {
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		int powresult =0;
-		int base = x;
+		int powresult = 1;
 		int i = 0;
-		if(n==0) {
-           powresult=1;
-		}else{
-			while(i<(n-1)){
-				x = times(x, base);
+		if(n == 0) {
+           powresult = 1;
+		} else {
+			while(i < n){
+				powresult = times(powresult, x);
 				i++;
 			}
-			powresult = x;
-
 		}
 		return powresult;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		  int i = 0;
-		  int count = 0;
-		while (count != x1){
-			if (count > x1){
-				i--;
+		int count = 0;
+		int i = 0;
+		while (count <= x1){
+			if (plus(count, x2) > x1){
 				break;
-			}else if(count< x1){ 
+			}
+			count = plus(count, x2);
 			i++;
-             count = plus(count,x2);
-		    }
 		}
 		return i;
 	}
@@ -99,14 +94,11 @@ public class Algebra {
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		int powcheck =0;
-		int i=1;
-		while(powcheck < x){
+		int i = 0;
+		while(pow(i, 2) < x){
 			i++;
-			powcheck = pow(i,2);
-			
 		}
-		if (powcheck > x){
+		if (pow(i, 2) > x){
 			i--;
 		}
 		return i;
