@@ -25,43 +25,90 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int i =0; 
+		while (i<x2){
+			x1++;
+			i++;
+		}
+		return x1;
 	}
 
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+	int i =0; 
+		while (i<x2){
+			x1--;
+			i++;
+		}		return x1;
 	}
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int i = 0;
+		int x3= 0;
+		while(i< x2){
+          x3 = plus(x3, x1);
+		  i++;
+		}
+		return x3;
 	}
 
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
+		int powresult =0;
+		int base = x;
+		int i = 0;
+		if(n==0) {
+           powresult=1;
+		}else{
+			while(i<(n-1)){
+				x = times(x, base);
+				i++;
+			}
+			powresult = x;
+
+		}
+		return powresult;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		  int i = 0;
+		  int count = 0;
+		while (count != x1){
+			if (count > x1){
+				i--;
+				break;
+			}else if(count< x1){ 
+			i++;
+             count = plus(count,x2);
+		    }
+		}
+		return i;
 	}
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+		int checkover = 0;
+		while (checkover <= x1){
+			checkover = plus(checkover, x2);
+		}
+		int moduresult = minus(x1 ,minus(checkover , x2));
+		return moduresult;
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+		int powcheck =0;
+		int i=1;
+		while(powcheck < x){
+			i++;
+			powcheck = pow(i,2);
+			
+		}
+		if (powcheck > x){
+			i--;
+		}
+		return i;
 	}	  	  
 }
